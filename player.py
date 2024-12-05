@@ -19,7 +19,7 @@ class Player(CircleShape):
 
     # override the draw method of CircleShape
     def draw(self,screen):
-        pygame.draw.polygon(screen, (255, 255, 255), self.triangle(),2)
+        pygame.draw.polygon(screen, COLOR, self.triangle(),2)
 
     def update(self, dt):
         keys = pygame.key.get_pressed()

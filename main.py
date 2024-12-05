@@ -6,6 +6,8 @@ from constants import *
 from player import Player
 from circleshape import CircleShape
 from pygame.locals import K_ESCAPE, KEYDOWN
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 # initialize pygame
 pygame.init()
@@ -22,11 +24,23 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
-    # instantiate a Player object
-    
+    # instantiate a Player object in middle of screen
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
     player = Player(x, y)
+
+
+    # creating groups and adding player instance
+    updatable = pygame.sprite.Group(player)
+    drawable = pygame.sprite.Group(player)
+    asteroids = pygame.sprite.Group()
+
+    # setting static containers for Asteroid and AsteroidField class
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable,)
+
+    # instatiate an AsteroidField
+    asteroid_field = AsteroidField()
     
     while True:
         # calculating dt first!
@@ -42,13 +56,16 @@ def main():
                  pygame.quit()
                  exit()
 
-        # re-rendering player each frame
-        player.update(dt)
-        
-        # Fill the screen with black
+        # iterate though all sprites in updatable group and update them
+        for sprite in updatable:
+            sprite.update(dt)
+
+        # Clear the screen
         screen.fill((0, 0, 0))
-        player.draw(screen)
         
+        # iterate through all sprites drawable group and draw them on screen
+        for sprite in drawable:
+            sprite.draw(screen)
 
         # Refresh the display
         pygame.display.flip()
