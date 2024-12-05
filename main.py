@@ -9,10 +9,10 @@ from circleshape import CircleShape
 from pygame.locals import K_ESCAPE, KEYDOWN
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 # initialize pygame
 pygame.init()
-
 # create an object to help track time
 clock = pygame.time.Clock()
 dt = 0
@@ -34,10 +34,12 @@ def main():
     updatable = pygame.sprite.Group(player)
     drawable = pygame.sprite.Group(player)
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
-    # setting static containers for Asteroid and AsteroidField class
+    # setting static containers for Asteroid, Shot and AsteroidField class
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable,)
+    Shot.containers = (shots, updatable, drawable)
 
     # instatiate an AsteroidField
     asteroid_field = AsteroidField()
@@ -59,7 +61,6 @@ def main():
         # iterate through asteroids and check if there is a player collision
         for asteroid in asteroids:
             if player.collision(asteroid):
-                game_over = True
                 print("Game Over!")
                 sys.exit()
 
