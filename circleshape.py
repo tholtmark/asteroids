@@ -20,3 +20,7 @@ class CircleShape(pygame.sprite.Sprite):
     def update(self, dt):
         # sub-classes must override
         raise NotImplementedError("Subclasses must implement this method")
+    
+    def collision(self, other):
+        distance = self.position.distance_to(other.position)
+        return distance <= self.radius + other.radius

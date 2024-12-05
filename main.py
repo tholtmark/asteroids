@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+import sys
 from constants import *
 from player import Player
 from circleshape import CircleShape
@@ -55,9 +56,19 @@ def main():
                  pygame.quit()
                  exit()
 
+        # iterate through asteroids and check if there is a player collision
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                game_over = True
+                print("Game Over!")
+                sys.exit()
+
         # iterate though all sprites in updatable group and update them
         for sprite in updatable:
             sprite.update(dt)
+
+            # Update display
+            pygame.display.flip()  # Update the screen to show changes
 
         # Clear the screen
         screen.fill((0, 0, 0))
