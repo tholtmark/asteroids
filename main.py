@@ -29,7 +29,6 @@ def main():
     y = SCREEN_HEIGHT / 2
     player = Player(x, y)
 
-
     # creating groups and adding player instance
     updatable = pygame.sprite.Group(player)
     drawable = pygame.sprite.Group(player)
@@ -41,7 +40,7 @@ def main():
 
     # instatiate an AsteroidField
     asteroid_field = AsteroidField()
-    
+
     while True:
         # calculating dt first!
         dt = clock.tick(60) / 1000.0
