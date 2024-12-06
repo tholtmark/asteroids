@@ -13,6 +13,7 @@ from shot import Shot
 
 # initialize pygame
 pygame.init()
+
 # create an object to help track time
 clock = pygame.time.Clock()
 dt = 0
@@ -57,12 +58,18 @@ def main():
               if event.key == K_ESCAPE:
                  pygame.quit()
                  exit()
-
+        
         # iterate through asteroids and check if there is a player collision
         for asteroid in asteroids:
             if player.collision(asteroid):
                 print("Game Over!")
                 sys.exit()
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision(asteroid):
+                    asteroid.kill() # removes asteroid
+                    shot.kill() # removes shot
 
         # iterate though all sprites in updatable group and update them
         for sprite in updatable:
