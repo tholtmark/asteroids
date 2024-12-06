@@ -48,7 +48,6 @@ def main():
     while True:
         # calculating dt first!
         dt = clock.tick(60) / 1000.0
-
        # Handle termination events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,10 +65,11 @@ def main():
                 sys.exit()
 
         for asteroid in asteroids:
-            for shot in shots:
-                if shot.collision(asteroid):
-                    asteroid.kill() # removes asteroid
-                    shot.kill() # removes shot
+                for shot in shots:
+                    if asteroid.collision(shot):
+                        shot.kill() # removes shot
+                        asteroid.split() # splits or kills asteroid
+                    
 
         # iterate though all sprites in updatable group and update them
         for sprite in updatable:
