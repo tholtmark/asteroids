@@ -21,6 +21,7 @@ dt = 0
 # set up display window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+
 def main():
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -48,16 +49,16 @@ def main():
     while True:
         # calculating dt first!
         dt = clock.tick(60) / 1000.0
-       # Handle termination events
+        # Handle termination events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
             if event.type == KEYDOWN:
-              if event.key == K_ESCAPE:
-                 pygame.quit()
-                 exit()
-        
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    exit()
+
         # iterate through asteroids and check if there is a player collision
         for asteroid in asteroids:
             if player.collision(asteroid):
@@ -65,11 +66,10 @@ def main():
                 sys.exit()
 
         for asteroid in asteroids:
-                for shot in shots:
-                    if asteroid.collision(shot):
-                        shot.kill() # removes shot
-                        asteroid.split() # splits or kills asteroid
-                    
+            for shot in shots:
+                if asteroid.collision(shot):
+                    shot.kill()  # removes shot
+                    asteroid.split()  # splits or kills asteroid
 
         # iterate though all sprites in updatable group and update them
         for sprite in updatable:
@@ -80,7 +80,7 @@ def main():
 
         # Clear the screen
         screen.fill((0, 0, 0))
-        
+
         # iterate through all sprites drawable group and draw them on screen
         for sprite in drawable:
             sprite.draw(screen)

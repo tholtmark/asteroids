@@ -1,5 +1,6 @@
 import pygame
 
+
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
@@ -17,7 +18,7 @@ class CircleShape(pygame.sprite.Sprite):
         # sub-classes must override
         # orraise NotImplementedError("Subclasses must implement this method")
         pass
-    
+
     def update(self, dt):
         # sub-classes must override
         # or raise NotImplementedError("Subclasses must implement this method")
